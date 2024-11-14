@@ -151,9 +151,17 @@ jobs:
           TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+          
       - name: Build ISO
         uses: jasonn3/build-container-installer@main
         id: build
+        env:
+          ARCH: "x86_64"
+          IMAGE_NAME: "nebula"
+          IMAGE_REPO: "skyeforeverblue/nebula"
+          IMAGE_TAG: "latest"
+          VERSION: "41"
+          VARIANT: "kinoite"
         with:
           arch: ${{ env.ARCH}}
           image_name: ${{ env.IMAGE_NAME}}
